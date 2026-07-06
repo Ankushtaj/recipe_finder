@@ -8,6 +8,7 @@ import { AiFillPushpin } from "react-icons/ai"
 import { FaYoutube, FaArrowLeft } from "react-icons/fa";
 import { BsPatchCheck } from "react-icons/bs"
 import RecipeCard from '../components/RecipeCard'
+import { Link } from "react-router-dom"
 
 const RecipeDetail = () => {
     const [recipe, setRecipe] = useState(null)
@@ -16,6 +17,28 @@ const RecipeDetail = () => {
 
     const { id } = useParams()
     const navigate = useNavigate();
+
+    let favs = JSON.parse(localStorage.getItem("favs")) || [];
+    const [add, setAdd] = useState(false);
+
+    function saveFavs() {
+        localStorage.setItem("favs", JSON.stringify(favs));
+    }
+
+    function addfav(id) {
+        if (!favs.includes(id))
+            favs.push(id)
+        saveFavs()
+    }
+    function removefav(id) {
+        for (let i = 0; i < favs.length; i++) {
+            if (favs[i] === id) {
+                favs.splice(i, 1)
+                saveFavs()
+                break
+            }
+        }
+    }
 
     const getRecipe = async (id) => {
         try {
@@ -36,6 +59,7 @@ const RecipeDetail = () => {
     }
 
     useEffect(() => {
+        setAdd((JSON.parse(localStorage.getItem("favs")) || []).includes(id))
         getRecipe(id)
     }, [id])
 
@@ -102,15 +126,36 @@ const RecipeDetail = () => {
                                 href={recipe?.youtube}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="bg-red-600 hover:bg-red-500 duration-300 px-6 py-3 rounded-lg flex items-center gap-3"
+                                className="bg-red-600 hover:bg-red-500 duration-300 p-3 rounded-lg flex items-center gap-3"
                             >
                                 <FaYoutube />
                                 Watch Recipe
                             </a>
                             <button
-                                onClick={() => navigate(-1)}
-                                className="bg-orange-400 hover:bg-orange-500 duration-300 px-6 py-3 rounded-lg flex items-center gap-3 text-orange-50 font-semibold"
+                                onClick={() => {
+                                    if (add) {
+                                        removefav(recipe?.id)
+                                        setAdd(false)
+                                    }
+                                    else {
+                                        addfav(recipe?.id)
+                                        setAdd(true)
+                                    }
+                                }}
+                                className="min-w-[220px] bg-orange-400 hover:bg-orange-500 duration-300 py-3 px-2 rounded-lg text-center text-white font-semibold tracking-tight"
                             >
+                                {(add == true) ? 'Remove from Favourites 🤍' : 'Add to Favourites ❤️'}
+                            </button>
+                            <Link
+                                to="/favourites"
+                                title="Go to Favourites"
+                                className="bg-orange-400 p-4 rounded-full shadow-lg duration-300 font-semibold text-xl transition-all duration-300 hover:scale-110 hover:text-orange-300 hover:border-orange-400 hover:shadow-[0_0_18px_rgba(251,146,60,0.65)]"
+                            >
+                                ❤️
+                            </Link>
+                            <button
+                                onClick={() => navigate(-1)}
+                                className="bg-slate-600 hover:bg-slate-700 duration-300 p-3 rounded-lg flex items-center gap-2 text-gray-100 font-medium tracking-tight">
                                 <FaArrowLeft />
                                 Back
                             </button>
@@ -120,7 +165,7 @@ const RecipeDetail = () => {
 
                 <div className="mt-20">
                     <h2 className="text-3xl font-bold text-orange-300 mb-8">You May Also Like</h2>
-                    <div className="grid [grid-template-columns:repeat(auto-fit,minmax(300px,1fr))] gap-8 p-6 place-items-center">
+                    <div className="grid [grid-template-columns:repeat(auto-fit,minmax(270px,1fr))] gap-8 p-6 place-items-center">
                         {
                             recipes.map((item, index) => (
                                 <RecipeCard recipe={item} key={index} />))

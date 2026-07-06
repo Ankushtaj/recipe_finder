@@ -3,7 +3,8 @@ import { BiSearchAlt2 } from 'react-icons/bi'
 import Loading from './Loading.jsx'
 import Searchbar from './SearchBar.jsx'
 import RecipeCard from './RecipeCard.jsx'
-import { normalizeMeal } from "../services/normalize.js";
+import { Link } from "react-router-dom"
+import { normalizeMeal } from "../services/normalize.js"
 import { searchByName, searchByCategory, searchByArea, searchByIngredient, fetchRecipeById, fetchRandomRecipes } from '../services/mealdb.js'
 
 const Recipes = () => {
@@ -63,7 +64,7 @@ const Recipes = () => {
         if (recipes.length > 0) {
             return (
                 <>
-                    <div className="grid [grid-template-columns:repeat(auto-fit,minmax(300px,1fr))] gap-8 py-6 px-8 place-items-center">
+                    <div className="grid grid-cols-[repeat(auto-fit,minmax(270px,1fr))] gap-8 py-6 px-6 place-items-center">
                         {
                             recipes.map((item, index) => (
                                 <RecipeCard recipe={item} key={index} />))
@@ -88,10 +89,16 @@ const Recipes = () => {
     }
     return (
         <div id='explore' className='bg-[#0b0f14] min-h-screen scroll-mt-16'>
-            <div className='w-full flex items-center justify-center pt-10 pb-5 px-0 md:px-10'>
+            <div className='w-full flex items-center justify-center gap-3 pt-10 pb-5 px-2 md:px-10'>
                 <form className='w-full lg:w-2/4' onSubmit={handleSearchedRecipe}>
                     <Searchbar placeholder="eg. Cake, Vegan, Chicken" handleInputChange={handleChange} rightIcon={<BiSearchAlt2 className='text-orange-300' onClick={handleSearchedRecipe} />} />
                 </form>
+                <Link
+                    to="/favourites"
+                    title="Go to Favourites"
+                    className='bg-black border border-gray-600/80 text-gray-300 text-md rounded-full block p-2.5 outline-none shadow-lg focus:ring focus:ring-slate-800 focus:border-slate-800 transition-all duration-300 hover:scale-110 hover:text-orange-300 hover:border-orange-400 hover:shadow-[0_0_18px_rgba(251,146,60,0.65)]'>
+                    ❤️
+                </Link>
             </div>
             {mountRecipes()}
         </div>
