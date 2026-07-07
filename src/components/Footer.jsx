@@ -117,7 +117,7 @@ const Footer = () => {
             </div>
 
             <div className="flex items-center justify-center py-1">
-                <span className="text-xs sm:text-sm md:text-[1rem] text-gray-400 text-center px-2">© 2026 • Designed & Developed by Ankush Das</span>
+                <span className="text-xs sm:text-sm md:text-[1rem] text-gray-400 text-center px-2">© 2026 • Designed & Developed by Ankush</span>
             </div>
         </footer>
     )

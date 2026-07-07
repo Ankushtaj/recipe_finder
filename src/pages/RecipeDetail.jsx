@@ -47,7 +47,7 @@ const RecipeDetail = () => {
             console.log(data)
             const normalized = normalizeMeal(data)
             setRecipe(normalized)
-            const recommend = await fetchRandomRecipes(8)
+            const recommend = await fetchRandomRecipes(6)
             setRecipes(recommend.map(normalizeMeal))
         }
         catch (error) {
@@ -87,12 +87,12 @@ const RecipeDetail = () => {
                 <div className="absolute bottom-8 left-6 md:left-16">
                     <h1 className="text-3xl md:text-5xl font-bold">{recipe?.title}</h1>
                     <div className="flex flex-wrap gap-3 mt-4">
-                        <span className="bg-orange-400 text-black px-4 py-1 rounded-full text-sm font-semibold">
+                        {(recipe?.category === "")? <></> : <span className="bg-orange-400 text-black px-4 py-1 rounded-full text-sm font-semibold">
                             {recipe?.category}
-                        </span>
-                        <span className="bg-zinc-800 px-4 py-1 rounded-full text-sm">
+                        </span>}
+                        {(recipe?.area === "")? <></> : <span className="bg-zinc-800 px-4 py-1 rounded-full text-sm">
                             {recipe?.area}
-                        </span>
+                        </span>}
                     </div>
                 </div>
             </div>
@@ -120,16 +120,16 @@ const RecipeDetail = () => {
 
                     <div>
                         <h2 className="text-2xl font-bold text-orange-300 mb-5">Instructions</h2>
-                        <div className="bg-zinc-900 border border-zinc-700 rounded-xl p-5 h-[350px] overflow-y-auto leading-8 text-gray-300 scrollbar-none">{recipe?.instructions}</div>
+                        <div className="bg-zinc-900 border border-zinc-700 rounded-xl p-5 max-h-[350px] overflow-y-auto leading-8 text-gray-300 scrollbar-none">{recipe?.instructions}</div>
                         <div className="flex flex-wrap gap-4 mt-8">
                             <a
-                                href={recipe?.youtube}
-                                target="_blank"
+                                href={(recipe?.youtube === "")?"javascript:void(0);":recipe?.youtube}
+                                target={(recipe?.youtube === "")?"":"_blank"}
                                 rel="noreferrer"
                                 className="bg-red-600 hover:bg-red-500 duration-300 p-3 rounded-lg flex items-center gap-3"
                             >
-                                <FaYoutube />
-                                Watch Recipe
+                                <FaYoutube className="size-8"/>
+                                {(recipe?.youtube === "")? "N/A" : "Watch"}
                             </a>
                             <button
                                 onClick={() => {
@@ -153,12 +153,6 @@ const RecipeDetail = () => {
                             >
                                 ❤️
                             </Link>
-                            <button
-                                onClick={() => navigate(-1)}
-                                className="bg-slate-600 hover:bg-slate-700 duration-300 p-3 rounded-lg flex items-center gap-2 text-gray-100 font-medium tracking-tight">
-                                <FaArrowLeft />
-                                Back
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -172,6 +166,14 @@ const RecipeDetail = () => {
                         }
                     </div>
                 </div>
+            </div>
+            <div className="flex justify-center px-8 pb-12">
+                <button
+                    onClick={() => navigate(-1)}
+                    className="bg-slate-600 hover:bg-slate-700 duration-300 p-3 rounded-lg flex items-center gap-2 text-gray-100 font-medium tracking-tight">
+                    <FaArrowLeft />
+                    Back
+                </button>
             </div>
         </div>
     );

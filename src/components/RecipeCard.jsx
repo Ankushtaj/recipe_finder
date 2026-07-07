@@ -18,25 +18,25 @@ const RecipeCard = ({ recipe }) => {
                     </div>
 
                     <div className="mt-2 flex flex-wrap gap-2.5">
-                        <span className="bg-amber-500 text-amber-50 px-3 py-1 rounded-full text-xs flex items-center gap-2">
+                        {(category === "")? <></> : <span className="bg-amber-500 text-amber-50 px-3 py-1 rounded-full text-xs flex items-center gap-2">
                             <FaUtensils />
                             {category}
-                        </span>
+                        </span>}
 
-                        <span className="bg-amber-700 text-amber-50 px-3 py-1 rounded-full text-xs flex items-center gap-2">
+                        {(area === "")? <></> : <span className="bg-amber-700 text-amber-50 px-3 py-1 rounded-full text-xs flex items-center gap-2">
                             <FaGlobe />
                             {area}
-                        </span>
+                        </span>}
                     </div>
 
                     <div className="mt-auto pt-4 flex gap-2">
                         <a
-                            href={youtube}
-                            target="_blank"
+                            href={(youtube === "")?"javascript:void(0);":youtube}
+                            target={(youtube === "")?"":"_blank"}
                             rel="noreferrer"
-                            className="flex-1 bg-red-700 hover:bg-red-600 text-white rounded-lg py-2 flex items-center justify-center gap-2 duration-300">
-                            <FaYoutube />
-                            Watch
+                            className="flex-1 bg-red-700 hover:bg-red-600 text-white rounded-lg py-2 flex items-center justify-center gap-3 duration-300">
+                            <FaYoutube className="size-8"/>
+                            {(youtube === "")? "N/A" : "Watch"}
                         </a>
 
                         <Link
