@@ -86,8 +86,8 @@ const Footer = () => {
                             </a>
 
                             <a
-                                href="#"
-                                aria-label="Twitter"
+                                href="https://www.linkedin.com/in/ankush-das-79491539a"
+                                aria-label="Linkedin"
                                 className="flex items-center justify-center w-9 h-9 rounded-full bg-white/5 border border-orange-100/30 text-gray-400 hover:text-orange-200 hover:border-orange-300/30 hover:bg-orange-300/5 hover:-translate-y-0.5 transition-all duration-300"
                             >
                                 <FaLinkedin size={16} />
