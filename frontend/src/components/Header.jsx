@@ -80,9 +80,9 @@ const Header = () => {
 
             </div>
 
-            <div className='absolute bottom-5 sm:bottom-7 md:bottom-9 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2'>
+            <div className='absolute bottom-15 sm:bottom-14 md:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2'>
 
-                <span className='hidden sm:block text-[9px] md:text-[10px] uppercase tracking-[0.28em] text-orange-100/60 mb-2'>
+                <span className='text-[9px] md:text-[10px] uppercase tracking-[0.28em] text-orange-100/60 mb-2'>
                     Explore
                 </span>
 
