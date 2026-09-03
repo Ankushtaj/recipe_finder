@@ -16,10 +16,12 @@ const Navbar = () => {
         setOpen(false)
         setShow(false)
         navigate("/")
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        })
+        setTimeout(() => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            })
+        }, 100)
     }
 
     const goExplore = () => {
@@ -176,54 +178,10 @@ const Navbar = () => {
 
                 </ul>
 
-                <div className='lg:hidden flex items-center gap-4'>
+                {/* MOBILE CONTROLS */}
+                <div className='lg:hidden flex items-center'>
 
-                    {
-                        user && (
-                            <div className='relative'>
-
-                                <button
-                                    onClick={() => setShow(!show)}
-                                    className='text-gray-300 hover:text-orange-300 transition-all duration-300'
-                                >
-                                    <AiOutlineUser className='text-xl' />
-                                </button>
-
-                                {
-                                    show && (
-                                        <div className='absolute right-0 mt-3 w-32 bg-zinc-950/95 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-hidden'>
-
-                                            <Link
-                                                to="/favourites"
-                                                onClick={() => setShow(false)}
-                                                className='block px-4 py-3 text-sm text-gray-300 hover:text-orange-300 hover:bg-orange-300/5 duration-300 transition-all'
-                                            >
-                                                Favourites
-                                            </Link>
-
-                                            <Link
-                                                to="/search-history"
-                                                onClick={() => setShow(false)}
-                                                className='block px-4 py-3 text-sm text-gray-300 hover:text-orange-300 hover:bg-orange-300/5 duration-300 transition-all'
-                                            >
-                                                Recents
-                                            </Link>
-
-                                            <button
-                                                onClick={handleLogout}
-                                                className='w-full text-left px-4 py-3 text-sm text-gray-300 hover:text-red-300 hover:bg-red-400/5 duration-300 transition-all'
-                                            >
-                                                Logout
-                                            </button>
-
-                                        </div>
-                                    )
-                                }
-
-                            </div>
-                        )
-                    }
-
+                    {/* HAMBURGER BUTTON */}
                     <button
                         className='text-gray-300 hover:text-orange-300 text-xl transition-all duration-300'
                         onClick={() => setOpen(!open)}
@@ -239,6 +197,7 @@ const Navbar = () => {
 
             </nav>
 
+            {/* MOBILE MENU */}
             <div className={`${open ? "flex" : "hidden"} lg:hidden bg-zinc-950/95 backdrop-blur-md border-t border-white/10 flex-col w-full px-4 py-6 text-gray-300 gap-6 text-[14px] font-medium tracking-wide shadow-2xl shadow-black/30`}>
 
                 <button
@@ -269,6 +228,70 @@ const Navbar = () => {
                 >
                     Follow Us
                 </button>
+
+                {
+                    user && (
+
+                        <div className='relative pt-2 border-t border-white/10'>
+
+                            {/* ACCOUNT BUTTON */}
+                            <button
+                                onClick={() => setShow(!show)}
+                                className='text-gray-300 flex items-center gap-2 hover:text-orange-300 duration-300 transition-all'
+                            >
+                                <span className='flex items-center justify-center rounded-full border border-orange-300/30 bg-orange-300/5 p-1.5'>
+                                    <AiOutlineUser className='text-lg' />
+                                </span>
+
+                                <p className='font-medium'>
+                                    {user?.name || user?.userId?.name || "Account"}
+                                </p>
+                            </button>
+
+                            {/* ACCOUNT DROPDOWN */}
+                            {
+                                show && (
+
+                                    <div className='absolute left-0 mt-3 w-32 bg-zinc-950/95 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-hidden'>
+
+                                        <Link
+                                            to="/favourites"
+                                            onClick={() => {
+                                                setShow(false)
+                                                setOpen(false)
+                                            }}
+                                            className='block px-4 py-3 text-sm text-gray-300 hover:text-orange-300 hover:bg-orange-300/5 duration-300 transition-all'
+                                        >
+                                            Favourites
+                                        </Link>
+
+                                        <Link
+                                            to="/search-history"
+                                            onClick={() => {
+                                                setShow(false)
+                                                setOpen(false)
+                                            }}
+                                            className='block px-4 py-3 text-sm text-gray-300 hover:text-orange-300 hover:bg-orange-300/5 duration-300 transition-all'
+                                        >
+                                            Recents
+                                        </Link>
+
+                                        <button
+                                            onClick={handleLogout}
+                                            className='w-full text-left px-4 py-3 text-sm text-gray-300 hover:text-red-300 hover:bg-red-400/5 duration-300 transition-all'
+                                        >
+                                            Logout
+                                        </button>
+
+                                    </div>
+
+                                )
+                            }
+
+                        </div>
+
+                    )
+                }
 
                 {
                     !user && (
