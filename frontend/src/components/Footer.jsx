@@ -29,19 +29,19 @@ const Footer = () => {
 
                         <div className="flex flex-col gap-2.5 text-sm text-gray-400">
 
-                            <Link
-                                to="/"
+                            <a
+                                href="#"
                                 className="hover:text-orange-300 transition-colors duration-200 w-fit"
                             >
                                 Home
-                            </Link>
+                            </a>
 
-                            <Link
-                                to="/#explore"
+                            <a
+                                href='#explore'
                                 className="hover:text-orange-300 transition-colors duration-200 w-fit"
                             >
                                 Explore
-                            </Link>
+                            </a>
 
                             <Link
                                 to="/community"

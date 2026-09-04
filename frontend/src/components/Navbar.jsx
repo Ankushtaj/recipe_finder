@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Logo from '../assets/mylogo.png'
 import { HiMenuAlt3 } from 'react-icons/hi'
 import { AiOutlineClose, AiOutlineUser } from 'react-icons/ai'
-import { useNavigate, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { useAuth } from "../context/AuthContext.jsx"
 
 const Navbar = () => {
@@ -10,43 +10,6 @@ const Navbar = () => {
     const [show, setShow] = useState(false)
 
     const { user, logout } = useAuth()
-    const navigate = useNavigate()
-
-    const goHome = () => {
-        setOpen(false)
-        setShow(false)
-        navigate("/")
-        setTimeout(() => {
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            })
-        }, 100)
-    }
-
-    const goExplore = () => {
-        setOpen(false)
-        setShow(false)
-        navigate("/")
-        setTimeout(() => {
-            document.getElementById("explore")?.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            })
-        }, 100)
-    }
-
-    const goFollow = () => {
-        setOpen(false)
-        setShow(false)
-        navigate("/")
-        setTimeout(() => {
-            document.getElementById("follow")?.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            })
-        }, 100)
-    }
 
     const handleLogout = async () => {
         try {
@@ -64,7 +27,6 @@ const Navbar = () => {
             <nav className='relative flex w-full py-2 px-4 sm:py-3 md:px-10 lg:px-14 items-center justify-between'>
 
                 <button
-                    onClick={goHome}
                     className='flex items-center justify-center gap-2 cursor-pointer group'
                 >
                     <img
@@ -80,21 +42,21 @@ const Navbar = () => {
                 <ul className='hidden lg:flex text-gray-300 gap-7 items-center font-medium tracking-wide'>
 
                     <li className='hover:text-orange-300 duration-300 transition-all'>
-                        <button
-                            onClick={goHome}
+                        <a
+                            href='#'
                             className='relative after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:bg-orange-300 after:transition-all after:duration-300 hover:after:w-full'
                         >
                             Home
-                        </button>
+                        </a>
                     </li>
 
                     <li className='hover:text-orange-300 duration-300 transition-all'>
-                        <button
-                            onClick={goExplore}
+                        <a
+                            href='#explore'
                             className='relative after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:bg-orange-300 after:transition-all after:duration-300 hover:after:w-full'
                         >
                             Explore
-                        </button>
+                        </a>
                     </li>
 
                     <li className='hover:text-orange-300 duration-300 transition-all'>
@@ -107,12 +69,12 @@ const Navbar = () => {
                     </li>
 
                     <li className='hover:text-orange-300 duration-300 transition-all'>
-                        <button
-                            onClick={goFollow}
+                        <a
+                            href='#follow'
                             className='relative after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-0 after:bg-orange-300 after:transition-all after:duration-300 hover:after:w-full'
                         >
                             Follow Us
-                        </button>
+                        </a>
                     </li>
 
                     {
@@ -178,10 +140,8 @@ const Navbar = () => {
 
                 </ul>
 
-                {/* MOBILE CONTROLS */}
                 <div className='lg:hidden flex items-center'>
 
-                    {/* HAMBURGER BUTTON */}
                     <button
                         className='text-gray-300 hover:text-orange-300 text-xl transition-all duration-300'
                         onClick={() => setOpen(!open)}
@@ -197,22 +157,21 @@ const Navbar = () => {
 
             </nav>
 
-            {/* MOBILE MENU */}
             <div className={`${open ? "flex" : "hidden"} lg:hidden bg-zinc-950/95 backdrop-blur-md border-t border-white/10 flex-col w-full px-4 py-6 text-gray-300 gap-6 text-[14px] font-medium tracking-wide shadow-2xl shadow-black/30`}>
 
-                <button
-                    onClick={goHome}
+                <a
+                    href='#'
                     className='text-left hover:text-orange-300 duration-300 transition-all'
                 >
                     Home
-                </button>
+                </a>
 
-                <button
-                    onClick={goExplore}
+                <a
+                    href='#explore'
                     className='text-left hover:text-orange-300 duration-300 transition-all'
                 >
                     Explore
-                </button>
+                </a>
 
                 <Link
                     to="/community"
@@ -222,19 +181,18 @@ const Navbar = () => {
                     Community
                 </Link>
 
-                <button
-                    onClick={goFollow}
+                <a
+                    href='#follow'
                     className='text-left hover:text-orange-300 duration-300 transition-all'
                 >
                     Follow Us
-                </button>
+                </a>
 
                 {
                     user && (
 
                         <div className='relative pt-2 border-t border-white/10'>
 
-                            {/* ACCOUNT BUTTON */}
                             <button
                                 onClick={() => setShow(!show)}
                                 className='text-gray-300 flex items-center gap-2 hover:text-orange-300 duration-300 transition-all'
@@ -248,7 +206,6 @@ const Navbar = () => {
                                 </p>
                             </button>
 
-                            {/* ACCOUNT DROPDOWN */}
                             {
                                 show && (
 
