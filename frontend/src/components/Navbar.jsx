@@ -31,10 +31,10 @@ const Navbar = () => {
                 >
                     <img
                         src={Logo}
-                        className='hidden sm:block w-7 h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 lg:w-12 lg:h-12 ml-2 drop-shadow-[0_0_8px_rgba(251,146,60,0.25)] transition-all duration-300 group-hover:drop-shadow-[0_0_12px_rgba(251,146,60,0.5)]'
+                        className='w-7 h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 lg:w-12 lg:h-12 ml-2 drop-shadow-[0_0_8px_rgba(251,146,60,0.25)] transition-all duration-300 group-hover:drop-shadow-[0_0_12px_rgba(251,146,60,0.5)]'
                     />
 
-                    <div className='relative text-xl sm:text-2xl md:text-3xl font-semibold font-serif tracking-tight bg-gradient-to-r from-gray-100 via-amber-100 to-orange-300 bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(255,255,255,0.15)] transition-all duration-300 group-hover:from-white group-hover:via-orange-100 group-hover:to-orange-400'>
+                    <div className='relative text-xl sm:text-2xl md:text-3xl font-semibold font-serif tracking-tight bg-linear-to-r from-gray-100 via-amber-100 to-orange-300 bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(255,255,255,0.15)] transition-all duration-300 group-hover:from-white group-hover:via-orange-100 group-hover:to-orange-400'>
                         Quick<span className='italic'>Cuisine</span>
                     </div>
                 </button>
@@ -143,7 +143,7 @@ const Navbar = () => {
                 <div className='lg:hidden flex items-center'>
 
                     <button
-                        className='text-gray-300 hover:text-orange-300 text-xl transition-all duration-300'
+                        className='text-gray-300 hover:text-orange-300 text-xl sm:text-2xl md:text-3xl transition-all duration-300'
                         onClick={() => setOpen(!open)}
                     >
                         {

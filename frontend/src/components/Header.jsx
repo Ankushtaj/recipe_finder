@@ -72,7 +72,7 @@ const Header = () => {
                                 QuickCuisine
                             </span>
                             {" — your passport to culinary adventures."}
-                            <span className='hidden sm:inline'> Discover new recipes, master your kitchen and inspire others.</span>
+                            <span className='inline'> Discover new recipes, master your kitchen and inspire others.</span>
                         </p>
                     </div>
 
